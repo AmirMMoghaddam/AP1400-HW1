@@ -12,7 +12,7 @@ int main(int argc, char **argv)
         int n {2};
         int m {3};
         Matrix B(n);
-        B = algebra::zeros(n,m);
+        B = algebra::ones(n,m);
         for(size_t i {0};i < 2 ; i++){
             for(size_t j {0};j < 3;j++){
                 std::cout << B[i][j] << " " ;
