@@ -147,5 +147,57 @@ namespace algebra{
         }
         return result;
     }
+    Matrix transpose(const Matrix& matrix){
+        size_t n {matrix.size()};
+        if(n == 0){
+            return matrix;
+        }
+        size_t m {matrix[0].size()};
+        Matrix result(m);
+        result = algebra::zeros(m,n);
+        for(size_t i{0};i < n;i++){
+            for(size_t j{0};j < m;j++){
+                result[j][i] = matrix[i][j] ;
+            }
+        }
+        return result;
+    }
+    Matrix minor(const Matrix& matrix, size_t n, size_t m){
+        size_t a {matrix.size()};
+        if(n == 0){
+            return matrix;
+        }
+        size_t b {matrix[0].size()};
+        Matrix result(a-1);
+        result = algebra::zeros(a-1,b-1);
+        for(size_t i{0};i < a;i++){   
+            if(i != n){
+                for(size_t j{0};j < b;j++){
+                    if(j != m){
+                        if(i < n ){
+                            if(j < m){
+                                result[i][j] = matrix[i][j] ;
+                            }
+                            else{
+                                result[i][j-1] = matrix[i][j] ;
+                            }
+                        }
+                        else{
+                            if(j < m){
+                                result[i-1][j] = matrix[i][j] ;
+                            }
+                            else{
+                                result[i-1][j-1] = matrix[i][j] ;
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+        return result;
+    }
+
+
 }
 

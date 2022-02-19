@@ -8,7 +8,7 @@ using Matrix = std::vector<std::vector<double>>;
 
 int main(int argc, char **argv)
 {
-    if (true) // make false to run unit-tests
+    if (false) // make false to run unit-tests
     {
        
         int n {2};
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
         algebra::show(C);
         std::cout << "the result matrix is : " << std::endl;
         Matrix D(n);
-        D = algebra::sum(B,C);
+        D = algebra::transpose(B);
         algebra::show(D);
         // std::cout << "rows : " << B.size() << std::endl;
         // std::cout << "columns : " << B[0].size() << std::endl;
