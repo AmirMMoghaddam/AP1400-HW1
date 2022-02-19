@@ -44,16 +44,53 @@ namespace algebra{
         return A;
 
     }
-    void show(const Matrix& A)
+    void show(const Matrix& matrix)
     {
-        size_t n {A.size()};
-        size_t m {A[0].size()};
+        size_t n {matrix.size()};
+        size_t m {matrix[0].size()};
          for(size_t i {0};i < n; i++){
             for(size_t j {0};j < m;j++){
-                std::cout << std::setprecision(3) << A[i][j] << " " ;
+                std::cout << std::setprecision(3) << matrix[i][j] << " " ;
             }
             std::cout << std::endl;
+        }
+
     }
-}
+    Matrix multiply(const Matrix& matrix, double c)
+    {
+        size_t n {matrix.size()};
+        size_t m {matrix[0].size()};
+        Matrix result(n);
+        result = algebra::zeros(n,m);
+        for(size_t i{0};i < n;i++){
+            for(size_t j{0};j < m;j++){
+                result[i][j] = matrix[i][j] * c ;
+            }
+        }
+        return result;
+
+    }
+    Matrix multiply(const Matrix& matrix1, const Matrix& matrix2)
+    {
+        size_t n {matrix1.size()};
+        size_t m {matrix1[0].size()};
+        size_t d {matrix2.size()};
+        size_t k {matrix2[0].size()};
+        Matrix result(n);
+        result = algebra::zeros(n,k);
+        double sum {0};
+        if(m != d)
+            throw std::logic_error("The dimensions are incorrect!");
+        for(size_t i{0};i < n;i++){
+            for(size_t j{0};j < k;j++){
+                double sum = 0;
+                for(size_t l{0};l < m;l++){
+                    sum += matrix1[i][l] * matrix2[l][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+        return result;
+    }
 }
 
