@@ -10,6 +10,7 @@ int main(int argc, char **argv)
 {
     if (true) // make false to run unit-tests
     {
+       
         int n {2};
         int m {3};
         double c {10};
@@ -20,12 +21,12 @@ int main(int argc, char **argv)
         std::cout << "the original matrix1 is : " << std::endl;
         algebra::show(B);
         Matrix C(n);
-        C = algebra::random(3,3,min,max);
+        C = algebra::random(2,3,min,max);
         std::cout << "the original matrix2 is : " << std::endl;
         algebra::show(C);
         std::cout << "the result matrix is : " << std::endl;
         Matrix D(n);
-        D = algebra::multiply(B,C);
+        D = algebra::sum(B,C);
         algebra::show(D);
         // std::cout << "rows : " << B.size() << std::endl;
         // std::cout << "columns : " << B[0].size() << std::endl;

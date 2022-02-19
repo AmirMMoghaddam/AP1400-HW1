@@ -14,7 +14,9 @@ namespace algebra{
     Matrix random(std::size_t n, std::size_t m, double min, double max);
     void show(const Matrix& matrix);//remember to add a setw to make more pretty
     Matrix multiply(const Matrix& matrix, double c);
-    Matrix multiply(const Matrix& matrix1, const Matrix& matrix2);//remember to add logic error
+    Matrix multiply(const Matrix& matrix1, const Matrix& matrix2);
+    Matrix sum(const Matrix& matrix, double c);
+    Matrix sum(const Matrix& matrix1, const Matrix& matrix2);
 }
 
 

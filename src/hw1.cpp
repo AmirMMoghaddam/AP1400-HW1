@@ -31,6 +31,8 @@ namespace algebra{
     }
     Matrix random(size_t n, size_t m, double min, double max)
     {
+        if( min >= max)
+            throw std::logic_error("Min is greater than Max!");
         std::random_device rd;
         std::mt19937 mt(rd());
         std::uniform_real_distribution<double> dist(min, max);
@@ -45,8 +47,12 @@ namespace algebra{
 
     }
     void show(const Matrix& matrix)
-    {
+    {   
         size_t n {matrix.size()};
+        if(n == 0){
+            std::cout << "matrix is empty" << std::endl;
+        }
+        else{
         size_t m {matrix[0].size()};
          for(size_t i {0};i < n; i++){
             for(size_t j {0};j < m;j++){
@@ -54,11 +60,15 @@ namespace algebra{
             }
             std::cout << std::endl;
         }
+        }
 
     }
     Matrix multiply(const Matrix& matrix, double c)
     {
         size_t n {matrix.size()};
+         if(n == 0){
+            return Matrix {};
+        }
         size_t m {matrix[0].size()};
         Matrix result(n);
         result = algebra::zeros(n,m);
@@ -73,8 +83,14 @@ namespace algebra{
     Matrix multiply(const Matrix& matrix1, const Matrix& matrix2)
     {
         size_t n {matrix1.size()};
+        if(n == 0){
+            return Matrix {};
+        }
         size_t m {matrix1[0].size()};
         size_t d {matrix2.size()};
+        if(d == 0){
+            return Matrix {};
+        }
         size_t k {matrix2[0].size()};
         Matrix result(n);
         result = algebra::zeros(n,k);
@@ -88,6 +104,45 @@ namespace algebra{
                     sum += matrix1[i][l] * matrix2[l][j];
                 }
                 result[i][j] = sum;
+            }
+        }
+        return result;
+    }
+    Matrix sum(const Matrix& matrix, double c){
+        size_t n {matrix.size()};
+        if(n == 0){
+            return Matrix {};
+        }
+        size_t m {matrix[0].size()};
+        Matrix result(n);
+        result = algebra::zeros(n,m);
+        for(size_t i{0};i < n;i++){
+            for(size_t j{0};j < m;j++){
+                result[i][j] = matrix[i][j] + c ;
+            }
+        }
+        return result;
+    }
+    Matrix sum(const Matrix& matrix1, const Matrix& matrix2){
+        size_t n {matrix1.size()};
+        if(n == 0){
+            return matrix2;
+        }
+        size_t m {matrix1[0].size()};
+        size_t d {matrix2.size()};
+        if(d == 0){
+            return matrix1;
+        }
+        size_t k {matrix2[0].size()};
+        if(n != d || m != k){
+            throw std::logic_error("The dimensions are incorrect!");
+        }
+
+        Matrix result(n);
+        result = algebra::zeros(n,k);
+        for(size_t i{0};i < n;i++){
+            for(size_t j{0};j < m;j++){
+                result[i][j] = matrix1[i][j] + matrix2[i][j] ;
             }
         }
         return result;
