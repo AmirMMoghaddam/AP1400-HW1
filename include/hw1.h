@@ -18,7 +18,9 @@ namespace algebra{
     Matrix sum(const Matrix& matrix, double c);
     Matrix sum(const Matrix& matrix1, const Matrix& matrix2);// run the tests
     Matrix transpose(const Matrix& matrix);
-    Matrix minor(const Matrix& matrix, size_t n, size_t m);
+    Matrix minor(const Matrix& matrix, size_t n, size_t m);// too messy change it if u can
+    double determinant(const Matrix& matrix);//check for the empty matrix
+     Matrix inverse(const Matrix& matrix);
 }
 
 

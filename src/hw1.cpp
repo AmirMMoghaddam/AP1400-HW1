@@ -164,7 +164,7 @@ namespace algebra{
     }
     Matrix minor(const Matrix& matrix, size_t n, size_t m){
         size_t a {matrix.size()};
-        if(n == 0){
+        if(a == 0){
             return matrix;
         }
         size_t b {matrix[0].size()};
@@ -197,7 +197,60 @@ namespace algebra{
         }
         return result;
     }
+    double determinant(const Matrix& matrix){
+        size_t n {matrix.size()};
+        if(n == 0){
+            return 1;
+        }
+        size_t m {matrix[0].size()};
+        double result {0};
+        if(n != m){
+            throw std::logic_error("Matrix is not sqaure !");
+        }
+        if(n == 2 ){
+            result = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+        }
+        else{
+            for(size_t i{0};i < m;i++){
+                if(((1+i)%2) == 0){
+                    result += matrix[1][i] * algebra::determinant(algebra::minor(matrix,1,i));
+                }
+                else{
+                    result -= matrix[1][i] * algebra::determinant(algebra::minor(matrix,1,i));
+                }
+            }
+        }
+        return result;
+    }
+    Matrix inverse(const Matrix& matrix){
+        size_t n {matrix.size()};
+        if(n == 0){
+            return matrix;
+        }
+        size_t m {matrix[0].size()};
+        double det {algebra::determinant(matrix)};
+        if(det == 0){
+            throw std::logic_error("determinant is zero !");
+        }
+        Matrix adj(n);
+        Matrix result(n);
+        result = algebra::zeros(n,n);
+        adj = algebra::zeros(n,n);
 
-
+         for(size_t i{0};i < n;i++){
+            for(size_t j{0};j < n;j++){
+                if(((j+i)%2) == 0){
+                   adj[i][j] = algebra::determinant(algebra::minor(matrix,i,j));
+                }
+                else{
+                    adj[i][j] = - 1 * algebra::determinant(algebra::minor(matrix,i,j));
+                }
+                
+            }
+        }
+        result = algebra::multiply(algebra::transpose(adj),1/det);
+        return result;
+        
+    }
 }
 
