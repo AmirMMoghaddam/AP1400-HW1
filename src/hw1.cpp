@@ -307,13 +307,10 @@ namespace algebra{
             throw std::logic_error("the input is incorrect !");
         }
         size_t c {matrix[0].size()};
-        std::vector<double> RowCache(c);
-        // put r1 in Row chache :
-        RowCache = matrix[r1];
         Matrix result(r);
         result = algebra::zeros(r,c);
         result[r1] = std::vector<double> {matrix[r2]};
-        result[r2] = std::vector<double> {RowCache};
+        result[r2] = std::vector<double> {matrix[r1]};
         for(size_t i{0};i < r;i++){
             for(size_t j{0};j < c;j++){
                 if(i != r1 && i != r2){
