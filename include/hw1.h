@@ -22,7 +22,10 @@ namespace algebra{
     double determinant(const Matrix& matrix);//check for the empty matrix
     Matrix inverse(const Matrix& matrix);// too messy change it if u can
     Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis);
-    
+    Matrix ero_swap(const Matrix& matrix, size_t r1, size_t r2);
+    Matrix ero_multiply(const Matrix& matrix, size_t r, double c);
+    Matrix ero_sum(const Matrix& matrix, size_t r1, double c, size_t r2);
+    Matrix upper_triangular(const Matrix& matrix);
 
 
 }

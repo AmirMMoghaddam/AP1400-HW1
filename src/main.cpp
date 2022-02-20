@@ -34,17 +34,17 @@ int main(int argc, char **argv)
         //         std::cout << B[i][j] << " " ;
         //     }
         //     std::co
-       Matrix matrix1{algebra::random(2, 3, 0, 1)};
-       Matrix matrix2{algebra::random(4, 3, 0, 1)};
-       Matrix matrix{algebra::concatenate(matrix1, matrix2, 0)};
+       Matrix matrix2{{0, 2, 3}, {4, 7, 5}, {6, 1, 3}};
+       Matrix res2{algebra::upper_triangular(matrix2)};
        std::cout << "matrix1 : "  << std::endl;
-       algebra::show(matrix1);
-       std::cout << "matrix2 : " << std::endl;
        algebra::show(matrix2);
-       std::cout << "matrix : " << std::endl;
-       algebra::show(matrix);
-
-        // std::cout << (algebra::determinant(algebra::minor(matrix,0,0))) / (algebra::determinant(matrix)) << std::endl;
+       std::cout << "res : "  << std::endl;
+       algebra::show(res2);
+       
+    //    for(size_t i{0};i<matrix1[0].size();i++){
+    //         std::cout << RowCache[i] << " " ;
+    //    }
+    //    std::cout << std::endl;
         
     }
     else
