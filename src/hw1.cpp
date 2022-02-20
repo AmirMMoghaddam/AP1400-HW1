@@ -252,5 +252,61 @@ namespace algebra{
         return result;
         
     }
+    Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis){
+        size_t n {matrix1.size()};
+        if(n == 0){
+            throw std::logic_error("matrix is empty!");
+        }
+        size_t m {matrix1[0].size()};
+        size_t d {matrix2.size()};
+        if(d == 0){
+            throw std::logic_error("matrix is empty!");
+        }
+        size_t k {matrix2[0].size()};
+        if(axis == 1){
+            if( n != d){
+                throw std::logic_error("dimensions are incorrect !");
+            }
+            Matrix result(n);
+            result = algebra::zeros(n,m+k);
+            for(size_t i{0};i < n;i++){
+                for(size_t j{0};j < m+d;j++){
+                    if(j >= m){
+                        result[i][j] = matrix2[i][j-m] ;
+                    }
+                    else{
+                        result[i][j] = matrix1[i][j] ;
+                    }
+                    
+                }
+            }
+           
+            return result;
+        }
+        else if(axis == 0){
+            if( m != k){
+                throw std::logic_error("dimensions are incorrect !");
+            }
+            Matrix result(n+d);
+            result = algebra::zeros(n+d,m);
+            for(size_t i{0};i < n+d;i++){
+                for(size_t j{0};j < m;j++){
+                   if(i >= n){
+                        result[i][j] = matrix2[i-n][j] ;
+                    }
+                    else{
+                        result[i][j] = matrix1[i][j] ;
+                    }
+                }
+            }
+            return result;
+        }
+        
+        else{
+            throw std::logic_error("axis have incorrect value!");
+        }
+    }
+    
+        
 }
 

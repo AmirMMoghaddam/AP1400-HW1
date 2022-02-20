@@ -34,8 +34,16 @@ int main(int argc, char **argv)
         //         std::cout << B[i][j] << " " ;
         //     }
         //     std::co
-        Matrix matrix{{-1, 1.5, -1.75, -2}, {-2, 2.5, -2.75, -3}, {3, 3.5, -3.75, -4}, {4, 4.5, 4.75, -5}};
-        algebra::show(algebra::inverse(matrix));
+       Matrix matrix1{algebra::random(2, 3, 0, 1)};
+       Matrix matrix2{algebra::random(4, 3, 0, 1)};
+       Matrix matrix{algebra::concatenate(matrix1, matrix2, 0)};
+       std::cout << "matrix1 : "  << std::endl;
+       algebra::show(matrix1);
+       std::cout << "matrix2 : " << std::endl;
+       algebra::show(matrix2);
+       std::cout << "matrix : " << std::endl;
+       algebra::show(matrix);
+
         // std::cout << (algebra::determinant(algebra::minor(matrix,0,0))) / (algebra::determinant(matrix)) << std::endl;
         
     }

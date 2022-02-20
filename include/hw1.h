@@ -20,7 +20,11 @@ namespace algebra{
     Matrix transpose(const Matrix& matrix);
     Matrix minor(const Matrix& matrix, size_t n, size_t m);// too messy change it if u can
     double determinant(const Matrix& matrix);//check for the empty matrix
-     Matrix inverse(const Matrix& matrix);
+    Matrix inverse(const Matrix& matrix);// too messy change it if u can
+    Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis);
+    
+
+
 }
 
 
